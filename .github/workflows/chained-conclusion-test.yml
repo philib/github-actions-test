@@ -5,23 +5,24 @@ on:
     types:
       - completed
 jobs:
-  onSkipped:
-    if: ${{ github.event.workflow_run.conclusion == 'skipped' }}
+  checkConclusion:
+    env: 
+      DEPLOYABLE: ${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'skipped' }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Skipped"
-  onCancelled:
-    if: ${{ github.event.workflow_run.conclusion == 'cancelled' }}
+      - run: if $DEPLOYABLE ; then echo 'Yes, its deployable' ; else echo 'No its not deployable' && exit 1 ; fi
+        name: Checking
+  doSomething:
+    needs: [checkConclusion]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Cancelled"
-  onSuccess:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+      - run: echo "im doing something"
+        name: Something
+  doAlways:
+    needs: [doSomething]
     runs-on: ubuntu-latest
+    if: always()
     steps:
-      - run: echo "Success"
-  onFailure:
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Failure"
+      - run: echo "im doing something on failure"
+        name: On Failure
+        if: env.WORKFLOW_CONCLUSION == 'failure'
