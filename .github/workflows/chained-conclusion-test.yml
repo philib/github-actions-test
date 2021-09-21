@@ -1,0 +1,27 @@
+name: Conclusion Test on Skipping Worfklow
+on:
+  workflow_run:
+    workflows: ["Skipped Workflow"]
+    types:
+      - completed
+jobs:
+  onSkipped:
+    if: ${{ github.event.workflow_run.conclusion == 'skipped' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Skipped"
+  onCancelled:
+    if: ${{ github.event.workflow_run.conclusion == 'cancelled' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Cancelled"
+  onSuccess:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Success"
+  onFailure:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Failure"
