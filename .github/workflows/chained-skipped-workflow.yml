@@ -1,0 +1,11 @@
+name: Chained on Skipped Workflow
+on:
+  workflow_run:
+    workflows: ["Skipped Workflow"]
+    types:
+      - completed
+jobs:
+  doSomething:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Done"

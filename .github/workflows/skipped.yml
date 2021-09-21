@@ -1,0 +1,10 @@
+name: Skipped Workflow
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  doNothing:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This should not be printed"
