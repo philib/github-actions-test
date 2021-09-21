@@ -3,7 +3,7 @@ on:
   workflow_run:
     workflows: ["Simple Workflow"]
     types:
-      - requested
+      - completed
 jobs:
   doSomething:
     runs-on: ubuntu-latest
