@@ -1,0 +1,9 @@
+name: Failing Workflow
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  doSomething:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
