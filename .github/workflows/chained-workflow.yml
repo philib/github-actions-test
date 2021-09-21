@@ -8,4 +8,4 @@ jobs:
   doSomething:
     runs-on: ubuntu-latest
     steps:
-      - run: sleep 20 && echo "Done"
+      - run: echo "Done"
