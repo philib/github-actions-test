@@ -1,7 +1,7 @@
-name: Chained Workflow
+name: Chained on Simple Workflow
 on:
   workflow_run:
-    workflows: ["Simple Workflow", "Failing Workflow"]
+    workflows: ["Simple Workflow"]
     types:
       - completed
 jobs:
