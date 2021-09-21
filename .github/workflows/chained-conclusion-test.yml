@@ -1,7 +1,7 @@
-name: Conclusion Test on Skipping Worfklow
+name: Conclusion Test on Simple Worfklow
 on:
   workflow_run:
-    workflows: ["Skipped Workflow"]
+    workflows: ["Simple Workflow"]
     types:
       - completed
 jobs:
