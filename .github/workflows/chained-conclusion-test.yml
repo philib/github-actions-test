@@ -7,9 +7,12 @@ on:
 jobs:
   checkConclusion:
     env: 
+      RELEASE_CONTAINER_TAG: git-${{ github.event.workflow_run.head_sha::7 }}
       DEPLOYABLE: ${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'skipped' }}
     runs-on: ubuntu-latest
     steps:
+      - run: echo $RELEASE_CONTAINER_TAG
+        name: Container Tag
       - run: if $DEPLOYABLE ; then echo 'Yes, its deployable' ; else echo 'No its not deployable' && exit 1 ; fi
         name: Checking
   doSomething:
