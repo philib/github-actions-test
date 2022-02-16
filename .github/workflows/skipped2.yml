@@ -1,0 +1,15 @@
+name: Skipped Workflow Test
+on:
+  push:
+    branches: [main]
+jobs:
+  doNothing:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This should not be printed"
+  doSomething:
+    needs: [doNothing]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Please print this"
