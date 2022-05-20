@@ -23,4 +23,6 @@ jobs:
     steps:
       - name: Starting Deployment
         run: echo "Starting Deployment of ${{ github.ref }}"
+      - name: Echo something
+        run: echo "something"
 
