@@ -5,4 +5,4 @@ on:
 
 jobs:
   call-workflow:
-    uses: philib/github-actions-test/.github/workflows/build-artifacts.yml
+    uses: philib/github-actions-test/.github/workflows/build-artifacts.yml@release
