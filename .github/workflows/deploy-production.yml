@@ -8,12 +8,11 @@ jobs:
     uses: philib/github-actions-test/.github/workflows/build-artifacts.yml@release
   print-job:
     needs: [ call-workflow ]
-    if: always()
+    if: ${{ always() && (needs.call-workflow.result == 'success' || needs.call-workflow.result == 'skipped') }}
     runs-on: ubuntu-latest
     steps:
       - name: Workflow result
         run: echo ${{ needs.call-workflow.result }}
       - name: Print this
         run: echo ${{ github.ref }}
-        if: ${{ needs.call-workflow.result == 'success' || needs.call-workflow.result == 'skipped' }}
 
