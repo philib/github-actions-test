@@ -4,6 +4,7 @@ on:
 
 jobs:
   stevejobs:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checking artifacts
