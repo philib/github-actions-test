@@ -8,5 +8,5 @@ jobs:
     steps:
       - name: Checking artifacts
         run: echo ${{ github.ref }}
-      - name: Fail me
-        run: exit 1
+#      - name: Fail me
+#        run: exit 1
