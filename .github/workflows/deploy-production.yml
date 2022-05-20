@@ -4,15 +4,23 @@ on:
     branches: [release]
 
 jobs:
-  call-workflow:
+  build-artifact:
     uses: philib/github-actions-test/.github/workflows/build-artifacts.yml@release
-  print-job:
-    needs: [ call-workflow ]
-    if: ${{ always() && (needs.call-workflow.result == 'success' || needs.call-workflow.result == 'skipped') }}
+  check-artifact:
+    needs: [ build-artifact ]
+    if: always()
+    env:
+      DEPLOYABLE: ${{ needs.build-artifact.result == 'success' || needs.build-artifact.result == 'skipped' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Workflow result
-        run: echo ${{ needs.call-workflow.result }}
-      - name: Print this
-        run: echo ${{ github.ref }}
+      - name: Print Result
+        run: echo ${{ needs.build-aritfact.result }}
+      - name: Checking artifact
+        run: if $DEPLOYABLE ; then echo "Start deployment of GitHub SHA ${GITHUB_SHA}..." ; else echo 'Can not deploy due to missing artifacts' && exit 1 ; fi
+  deploy:
+    needs: [ check-artifact ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Starting Deployment
+        run: echo "Starting Deployment of ${{ github.ref }}"
 
