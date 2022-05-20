@@ -1,9 +1,0 @@
-name: Simple Workflow
-on:
-  pull_request:
-    branches: [main]
-jobs:
-  doSomething:
-    runs-on: ubuntu-latest
-    steps:
-      - run: sleep 20 && echo "Done"
