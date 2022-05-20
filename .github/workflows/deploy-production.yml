@@ -6,3 +6,9 @@ on:
 jobs:
   call-workflow:
     uses: philib/github-actions-test/.github/workflows/build-artifacts.yml@release
+  print-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print this
+        run: echo ${{ github.ref }}
+
