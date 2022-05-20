@@ -8,6 +8,7 @@ jobs:
     uses: philib/github-actions-test/.github/workflows/build-artifacts.yml@release
   print-job:
     needs: [ call-workflow ]
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Workflow result
