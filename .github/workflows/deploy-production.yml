@@ -1,0 +1,8 @@
+name: Deploy Production
+on:
+  push:
+    branches: [release]
+
+jobs:
+  call-workflow:
+    uses: philib/github-actions-test/.github/workflows/build-artifacts.yml

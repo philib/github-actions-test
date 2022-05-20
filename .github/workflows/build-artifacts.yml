@@ -1,0 +1,10 @@
+name: Build Artifacts
+on:
+  workflow_call:
+
+jobs:
+  stevejobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking artifacts
+        run: cat where-am-i
