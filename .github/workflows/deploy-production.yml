@@ -6,6 +6,7 @@ on:
 jobs:
   build-artifact:
     uses: philib/github-actions-test/.github/workflows/build-artifacts.yml@release
+    secrets: inherit
   check-artifact:
     needs: [ build-artifact ]
     if: always()
